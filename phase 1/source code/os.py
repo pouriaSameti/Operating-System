@@ -5,6 +5,7 @@ class OS:
 
     __store = ["load"]
     __arithmetic = ['add', 'sub', 'mul']
+    __signals = ['create_process', 'run_process', 'block_process', 'unblock_process', 'show_context', 'kill_process']
 
     @classmethod
     def type_instruction(cls, ins: str):
