@@ -61,3 +61,16 @@ class Process:
             acc.reset()
             temp.reset()
             pc.reset()
+
+        if signal == 'unblock_process':
+            self.__state = Process.__states[1]
+
+            ir_value = self.__context['ir']
+            acc_value = self.__context['acc']
+            temp_value = self.__context['temp']
+            current_line = self.__context['current_line']
+
+            ir.set(ir_value[0], ir_value[1])
+            acc.set(acc_value)
+            temp.set(temp_value)
+            self.__current_line = current_line
