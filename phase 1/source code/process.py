@@ -51,3 +51,13 @@ class Process:
             self.__context['acc'] = acc.get()
             self.__context['temp'] = temp.get()
             self.__context['current_line'] = self.__current_line
+
+        if signal == 'block_process':
+            self.__state = Process.__states[2]
+
+            self.__context['acc'] = acc.get()
+
+            ir.reset()
+            acc.reset()
+            temp.reset()
+            pc.reset()
