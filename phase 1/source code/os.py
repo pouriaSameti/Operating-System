@@ -18,8 +18,7 @@ class OS:
             return '-'
 
     @classmethod
-    def store_operate(cls, instruction: str, value: int, ir: IR, temp: Temp, acc: Accumulator):
-        ir.set(instruction, value)
+    def store_operate(cls, value: int, temp: Temp, acc: Accumulator):
         temp.set(value)
         acc.set(value)
 
@@ -45,13 +44,12 @@ class OS:
     def run(cls, commands: list, os, ir: IR, temp: Temp, acc: Accumulator, pc: PC):
         for cmd in commands:
             pc.increment()
-            print(pc.get())
             instruction, value = cmd.split()
+            ir.set(instruction, int(value))
             if os.type_instruction(instruction) == 'store':
-                os.store_operate(instruction, int(value), ir, temp, acc)
+                os.store_operate(int(value), temp, acc)
 
             if os.type_instruction(instruction) == 'arithmetic':
                 os.arithmetic_operate(int(value), instruction, temp, acc)
 
         pc.reset()
-        print(pc.get())
