@@ -47,3 +47,30 @@ class Accumulator:
 
         return self.__value[0]
 
+
+class PC:
+
+    def __init__(self):
+        self.__amount = 0
+        self.__ra = 0  # ra == return address
+
+    def increment(self):
+        self.__amount += 1
+
+    def reset(self):
+        self.__amount = 0
+
+    def get(self):
+        return self.__amount
+
+    def get_ra(self):
+        return self.__ra
+
+    def jump(self, new_address: int):
+        self.__ra = self.__amount
+        self.__amount = new_address
+
+    def jump_back(self):
+        self.__amount = self.__ra
+        self.__ra = 0
+
