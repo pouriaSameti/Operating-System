@@ -76,14 +76,13 @@ class Process:
             self.__current_line = current_line
 
         if signal == 'show_context':
-
             result = ''
             if self.__state == Process.__states[2]:
-                result = self.get_id() + '\n' + self.__state
+                result = self.get_id() + ' is ' + self.__state + '\n'
 
             else:
                 result = self.get_id() + '\n' + ir.__str__() + '\n\n' + acc.__str__() + '\t' + \
-                         temp.__str__() + '\n' + pc.__str__() + '\t\t\t' + self.__state
+                         temp.__str__() + '\n' + pc.__str__() + '\t\t\t' + 'State:' + self.__state
 
             print(result)
 
