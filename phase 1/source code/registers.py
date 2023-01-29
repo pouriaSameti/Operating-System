@@ -105,3 +105,7 @@ class IR:
 
         if instruction not in ir_arr:
             raise Exception("Invalid Instruction")
+
+    def __str__(self):
+        return f"IR: instruction:{self.get_instruction()} {self.__immediate}"
+
