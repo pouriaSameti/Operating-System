@@ -7,6 +7,10 @@ class OS:
     __arithmetic = ['add', 'sub', 'mul']
     __signals = ['create_process', 'run_process', 'block_process', 'unblock_process', 'show_context', 'kill_process']
 
+    def __init__(self):
+        self.__ram = {}  # key: 'process_id + line_number'  &  value: command
+        self.__processes = {}  # key: 'process_id  &  value: process object
+
     @classmethod
     def type_instruction(cls, ins: str):
         if ins in cls.__store:
