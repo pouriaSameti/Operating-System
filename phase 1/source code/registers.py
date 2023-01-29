@@ -82,6 +82,9 @@ class IR:
         self.__instruction = instruction
         self.__immediate = immediate
 
+    def is_empty(self):
+        return self.__instruction == '' and self.__immediate == -sys.maxsize
+
     def set(self, instruction: str, immediate: int):
         IR.__check_instruction(instruction)
         self.__instruction = instruction
