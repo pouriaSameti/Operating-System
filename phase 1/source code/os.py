@@ -89,6 +89,11 @@ class OS:
         address = 'input commands\\' + 'commands' + '.txt'
         return np.loadtxt(address, dtype='str', delimiter="\n")
 
+    @classmethod
+    def read_instructions(cls, process_id):
+        address = 'input commands\\' + process_id + ' instruction.txt'
+        return np.loadtxt(address, dtype='str', delimiter="\n")
+
     @property
     def ram(self):
         return self.__ram
