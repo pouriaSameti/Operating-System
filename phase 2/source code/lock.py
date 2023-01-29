@@ -42,3 +42,9 @@ class Lock:
         self.__flags[process_id] = True
         return self.__flags[process_id]
 
+    def release(self, process_id):
+        self.__flags[process_id] = False
+        if not self.__queue.is_empty():
+            next_process = self.__queue.dequeue()
+            self.__flags[next_process] = True
+
