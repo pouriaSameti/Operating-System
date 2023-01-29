@@ -77,10 +77,9 @@ class PC:
 
 class IR:
 
-    def __init__(self, instruction: str, immediate: int):
-        IR.__check_instruction(instruction)
-        self.__instruction = instruction
-        self.__immediate = immediate
+    def __init__(self):
+        self.__instruction = ''
+        self.__immediate = -sys.maxsize
 
     def is_empty(self):
         return self.__instruction == '' and self.__immediate == -sys.maxsize
