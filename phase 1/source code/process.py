@@ -5,7 +5,7 @@ from os import OS
 class Process:
     __states = ['ready', 'running', 'blocked']
 
-    def __init__(self, p_id: str, commands: list, os: OS):
+    def __init__(self, p_id: str, commands: list, os):
         self.__process_id = p_id
         self.__context = {'ir': ('', -sys.maxsize), 'acc': -sys.maxsize, 'temp': -sys.maxsize,
                           'current_line': -sys.maxsize}
@@ -22,7 +22,7 @@ class Process:
     def get_commands(self):
         return self.__commands
 
-    def run(self, signal: str, os: OS, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
+    def run(self, signal: str, os, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
 
         if signal == 'create_process':
             self.__state = Process.__states[0]
@@ -78,12 +78,13 @@ class Process:
         if signal == 'show_context':
             result = ''
             if self.__state == Process.__states[2]:
-                result = self.get_id() + ' is ' + self.__state + '\n'
+                result = self.get_id() + ' is ' + self.__state
 
             else:
                 result = self.get_id() + '\n' + ir.__str__() + '\n\n' + acc.__str__() + '\t' + \
                          temp.__str__() + '\n' + pc.__str__() + '\t\t\t' + 'State:' + self.__state
 
+            result = '--------------------------------\n' + result + '\n--------------------------------\n'
             print(result)
 
         if signal == "kill_process":
@@ -95,3 +96,4 @@ class Process:
 
             pc.set(self.__end_pc + 1)
             os.kill_process(self.__process_id)
+
