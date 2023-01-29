@@ -1,4 +1,5 @@
 from registers import *
+import numpy as np
 
 
 class OS:
@@ -82,6 +83,11 @@ class OS:
                 os.arithmetic_operate(int(value), instruction, temp, acc)
 
         pc.reset()
+
+    @classmethod
+    def read_commands(cls):
+        address = 'input commands\\' + 'commands' + '.txt'
+        return np.loadtxt(address, dtype='str', delimiter="\n")
 
     @property
     def ram(self):
