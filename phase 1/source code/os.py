@@ -45,6 +45,9 @@ class OS:
 
         acc.set(result)
 
+    def add_process(self, process):
+        self.__processes[process.get_id()] = process
+
     @classmethod
     def run(cls, commands: list, os, ir: IR, temp: Temp, acc: Accumulator, pc: PC):
         for cmd in commands:
