@@ -58,6 +58,12 @@ class OS:
         self.__processes.pop(process_id)
 
     @classmethod
+    def reset_registers(cls, ir: IR, acc: Accumulator, temp: Temp):
+        ir.reset()
+        acc.reset()
+        temp.reset()
+
+    @classmethod
     def run(cls, commands: list, os, ir: IR, temp: Temp, acc: Accumulator, pc: PC):
         for cmd in commands:
             pc.increment()
