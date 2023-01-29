@@ -1,5 +1,6 @@
-from registers import *
+from register import *
 import numpy as np
+from process import Process
 
 
 class OS:
@@ -22,6 +23,27 @@ class OS:
 
         else:
             return '-'
+
+    def add_process(self, process):
+        self.__processes[process.get_id()] = process
+
+    def send_to_ram(self, process):
+        counter = 0
+        for cmd in process.get_commands():
+            self.__ram[f"{process.get_id()} {counter}"] = cmd
+            counter += 1
+
+    def kill_process(self, process_id):
+        self.__processes.pop(process_id)
+
+    @classmethod
+    def reset_registers(cls, ir: IR, acc: Accumulator, temp: Temp):
+        ir.reset()
+        acc.reset()
+        temp.reset()
+
+    def give_process(self, p_id: str):
+        return self.__processes[p_id]
 
     @classmethod
     def store_operate(cls, value: float, temp: Temp, acc: Accumulator):
@@ -46,29 +68,22 @@ class OS:
 
         acc.set(result)
 
-    def add_process(self, process):
-        self.__processes[process.get_id()] = process
+    @property
+    def ram(self):
+        return self.__ram
 
     def is_exist_process(self, process_id):
         return process_id in self.__processes.keys()
 
-    def give_process(self, p_id: str):
-        return self.__processes[p_id]
-
-    def send_to_ram(self, process):
-        counter = 0
-        for cmd in process.get_commands():
-            self.__ram[f"{process.get_id()} {counter}"] = cmd
-            counter += 1
-
-    def kill_process(self, process_id):
-        self.__processes.pop(process_id)
+    @classmethod
+    def read_commands(cls):
+        address = 'input commands\\' + 'commands' + '.txt'
+        return np.loadtxt(address, dtype='str', delimiter="\n")
 
     @classmethod
-    def reset_registers(cls, ir: IR, acc: Accumulator, temp: Temp):
-        ir.reset()
-        acc.reset()
-        temp.reset()
+    def read_instructions(cls, file_name: str):
+        address = 'input commands\\' + file_name
+        return np.loadtxt(address, dtype='str', delimiter="\n")
 
     @classmethod
     def run(cls, os, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
@@ -91,17 +106,3 @@ class OS:
                     process.run(signal, os, pc, ir, acc, temp)
                 else:
                     print("Process Does Not Exist")
-
-    @classmethod
-    def read_commands(cls):
-        address = 'input commands\\' + 'commands' + '.txt'
-        return np.loadtxt(address, dtype='str', delimiter="\n")
-
-    @classmethod
-    def read_instructions(cls, file_name: str):
-        address = 'input commands\\' + file_name
-        return np.loadtxt(address, dtype='str', delimiter="\n")
-
-    @property
-    def ram(self):
-        return self.__ram

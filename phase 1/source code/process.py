@@ -1,5 +1,4 @@
-from registers import *
-from os import OS
+from register import *
 
 
 class Process:
@@ -15,12 +14,6 @@ class Process:
         self.__start_line = len(os.ram)
         self.__end_pc = self.__start_line + len(commands)
         self.__current_line = 0
-
-    def get_id(self):
-        return self.__process_id
-
-    def get_commands(self):
-        return self.__commands
 
     def run(self, signal: str, os, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
 
@@ -73,28 +66,25 @@ class Process:
             self.__current_line = current_line
 
         if signal == 'show_context':
-            result = ''
-            if self.__state == Process.__states[2]:
-                result = result = self.get_id() + '\n' + 'Instruction Register:' + str(self.__context['ir']) +\
-                                  '\n\n' + 'Accumulator:' + str(self.__context['acc']) + '\t' + \
-                                  f'Temp:' + str(self.__context['temp']) + '\n' +\
-                                  'pc: ' + str(self.__start_line + self.__current_line) + '\t\t\t' + \
-                                  'State:' + self.__state
-
-            else:
-                result = self.get_id() + '\n' + ir.__str__() + '\n\n' + acc.__str__() + '\t' + \
-                         temp.__str__() + '\n' + pc.__str__() + '\t\t\t' + 'State:' + self.__state
+            result = self.get_id() + '\n' + 'Instruction Register:' + str(self.__context['ir']) +\
+                      '\n\n' + 'Accumulator:' + str(self.__context['acc']) + '\t' + \
+                      f'Temp:' + str(self.__context['temp']) + '\n' +\
+                      'pc: ' + str(self.__start_line + self.__current_line) + '\t\t\t' + \
+                      'State:' + self.__state
 
             result = '--------------------------------\n' + result + '\n--------------------------------\n'
             print(result)
 
         if signal == "kill_process":
+            self.__context = {'ir': ('', -sys.maxsize), 'acc': -sys.maxsize, 'temp': -sys.maxsize,
+                              'current_line': -sys.maxsize}
             ir.reset()
             acc.reset()
             temp.reset()
-            self.__context = {'ir': ('', -sys.maxsize), 'acc': -sys.maxsize, 'temp': -sys.maxsize,
-                              'current_line': -sys.maxsize}
-
-            pc.set(self.__end_pc + 1)
             os.kill_process(self.__process_id)
 
+    def get_id(self):
+        return self.__process_id
+
+    def get_commands(self):
+        return self.__commands

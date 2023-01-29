@@ -1,5 +1,5 @@
-from registers import *
-from os import OS
+from register import *
+from operating_system import OS
 
 if __name__ == '__main__':
 
@@ -62,4 +62,3 @@ if __name__ == '__main__':
     ir1 = IR("load", 20)
     print(ir1.get_instruction())
     print(ir1.get_immediate())"""
-
