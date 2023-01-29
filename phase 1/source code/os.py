@@ -48,6 +48,9 @@ class OS:
     def add_process(self, process):
         self.__processes[process.get_id()] = process
 
+    def is_exist_process(self, process_id):
+        return process_id in self.__processes.keys()
+
     def give_process(self, p_id: str):
         return self.__processes[p_id]
 
