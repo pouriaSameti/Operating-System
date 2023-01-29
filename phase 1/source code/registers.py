@@ -20,6 +20,9 @@ class Temp:
     def reset(self):
         self.__value[0] = -sys.maxsize
 
+    def __str__(self):
+        return f"temp: {self.get()}"
+
 
 class Accumulator:
 
