@@ -46,3 +46,8 @@ class Process:
                 os.arithmetic_operate(int(value), instruction, temp, acc)
 
             self.__current_line += 1
+
+            self.__context['ir'] = (ir.get_instruction(), ir.get_immediate())
+            self.__context['acc'] = acc.get()
+            self.__context['temp'] = temp.get()
+            self.__context['current_line'] = self.__current_line
