@@ -86,3 +86,13 @@ class Process:
                          temp.__str__() + '\n' + pc.__str__() + '\t\t\t' + self.__state
 
             print(result)
+
+        if signal == "kill_process":
+            ir.reset()
+            acc.reset()
+            temp.reset()
+            self.__context = {'ir': ('', -sys.maxsize), 'acc': -sys.maxsize, 'temp': -sys.maxsize,
+                              'current_line': -sys.maxsize}
+
+            pc.set(self.__end_pc + 1)
+            os.kill_process(self.__process_id)
