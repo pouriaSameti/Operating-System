@@ -82,6 +82,11 @@ class IR:
         self.__instruction = instruction
         self.__immediate = immediate
 
+    def set(self, instruction: str, immediate: int):
+        IR.__check_instruction(instruction)
+        self.__instruction = instruction
+        self.__immediate = immediate
+
     def reset(self):
         self.__instruction = ''
         self.__immediate = -sys.maxsize
