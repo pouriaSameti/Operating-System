@@ -21,7 +21,7 @@ class Temp:
         self.__value[0] = -sys.maxsize
 
     def __str__(self):
-        return f"temp: {self.get()}"
+        return f"Temp: {self.get()}"
 
 
 class Accumulator:
