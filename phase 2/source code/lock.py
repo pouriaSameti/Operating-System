@@ -32,3 +32,6 @@ class Lock:
         self.__flags = flags
         self.__turn = sys.maxsize
 
+    def __is_free(self):
+        return not any(self.__flags)
+
