@@ -7,18 +7,19 @@ class Temp:
         self.__value = [-sys.maxsize]
 
     def is_empty(self):
-        return -sys.maxsize == self.__value[0]
+        return -sys.maxsize == self.__value
 
-    def set(self, amount: int):
-        self.__value[0] = amount
+    def set(self, amount: float):
+        self.__value = amount
 
     def get(self):
         if self.is_empty():
             raise Exception("Temp Register is Empty")
-        return self.__value[0]
+
+        return self.__value
 
     def reset(self):
-        self.__value[0] = -sys.maxsize
+        self.__value = -sys.maxsize
 
     def __str__(self):
         return f"Temp: {self.get()}"
