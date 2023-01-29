@@ -78,6 +78,7 @@ class PC:
 class IR:
 
     def __init__(self, instruction: str, immediate: int):
+        IR.__check_instruction(instruction)
         self.__instruction = instruction
         self.__immediate = immediate
 
@@ -86,3 +87,10 @@ class IR:
 
     def get_immediate(self):
         return self.__immediate
+
+    @classmethod
+    def __check_instruction(cls, instruction: str):
+        ir_arr = ['load', 'add', 'sub', 'mul']
+
+        if instruction not in ir_arr:
+            raise Exception("Invalid Instruction")
