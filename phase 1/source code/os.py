@@ -25,18 +25,18 @@ class OS:
             return '-'
 
     @classmethod
-    def store_operate(cls, value: int, temp: Temp, acc: Accumulator):
+    def store_operate(cls, value: float, temp: Temp, acc: Accumulator):
         temp.set(value)
         acc.set(value)
 
     @classmethod
-    def arithmetic_operate(cls, value: int, operation: str, temp: Temp, acc: Accumulator):
+    def arithmetic_operate(cls, value: float, operation: str, temp: Temp, acc: Accumulator):
         if operation not in cls.__arithmetic:
             raise Exception("This is not arithmetic operation")
 
         temp.set(value)
 
-        result = 0
+        result = 0.0
         match operation:
             case 'add':
                 result = acc.get() + temp.get()
