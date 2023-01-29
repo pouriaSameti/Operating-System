@@ -79,19 +79,19 @@ class OS:
             print(command)
             counter += 1
 
-            signal, process_id = command.split()
-
-            if signal == 'create_process':
-                instructions = OS.read_instructions(process_id)
+            if 'create_process' in command:
+                signal, process_id, file_name = command.split()
+                instructions = OS.read_instructions(file_name)
                 process = Process(process_id, instructions, os)
                 process.run(signal, os, pc, ir, acc, temp)
 
-            if os.is_exist_process(process_id):
-                process = os.give_process(process_id)
-                process.run(signal, os, pc, ir, acc, temp)
-
             else:
-                print("Process Does Not Exist")
+                signal, process_id = command.split()
+                if os.is_exist_process(process_id):
+                    process = os.give_process(process_id)
+                    process.run(signal, os, pc, ir, acc, temp)
+                else:
+                    print("Process Does Not Exist")
 
     @classmethod
     def read_commands(cls):
