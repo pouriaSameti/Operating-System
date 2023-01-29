@@ -22,3 +22,9 @@ class Process:
     def get_commands(self):
         return self.__commands
 
+    def run(self, signal: str, os: OS, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
+
+        if signal == 'create_process':
+            self.__state = Process.__states[0]
+            os.add_process(self)
+            os.send_to_ram(self)
