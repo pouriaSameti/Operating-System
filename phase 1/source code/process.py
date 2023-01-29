@@ -54,9 +54,6 @@ class Process:
 
         if signal == 'block_process':
             self.__state = Process.__states[2]
-
-            self.__context['acc'] = acc.get()
-
             ir.reset()
             acc.reset()
             temp.reset()
