@@ -50,6 +50,9 @@ class Accumulator:
 
         return self.__value[0]
 
+    def __str__(self):
+        return f"accumulator: {self.get()}"
+
 
 class PC:
 
