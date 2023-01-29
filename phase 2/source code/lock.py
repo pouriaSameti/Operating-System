@@ -21,7 +21,8 @@ class Queue:
         self.__count -= 1
         return item
 
-
+    def is_empty(self):
+        return self.__count == 0
 
 
 
