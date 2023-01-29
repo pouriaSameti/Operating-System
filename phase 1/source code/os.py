@@ -1,4 +1,4 @@
-from register import *
+from registers import *
 
 
 class OS:
@@ -40,3 +40,18 @@ class OS:
                 result = acc.get() * temp.get()
 
         acc.set(result)
+
+    @classmethod
+    def run(cls, commands: list, os, ir: IR, temp: Temp, acc: Accumulator, pc: PC):
+        for cmd in commands:
+            pc.increment()
+            print(pc.get())
+            instruction, value = cmd.split()
+            if os.type_instruction(instruction) == 'store':
+                os.store_operate(instruction, int(value), ir, temp, acc)
+
+            if os.type_instruction(instruction) == 'arithmetic':
+                os.arithmetic_operate(int(value), instruction, temp, acc)
+
+        pc.reset()
+        print(pc.get())
