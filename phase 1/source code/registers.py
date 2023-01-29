@@ -57,28 +57,22 @@ class Accumulator:
 class PC:
 
     def __init__(self):
-        self.__amount = 0
-        self.__ra = 0  # ra == return address
+        self.__counter = 0
 
     def increment(self):
-        self.__amount += 1
+        self.__counter += 1
+
+    def set(self, value: int):
+        self.__counter = value
 
     def reset(self):
-        self.__amount = 0
+        self.__counter = 0
 
     def get(self):
-        return self.__amount
+        return self.__counter
 
-    def get_ra(self):
-        return self.__ra
-
-    def jump(self, new_address: int):
-        self.__ra = self.__amount
-        self.__amount = new_address
-
-    def jump_back(self):
-        self.__amount = self.__ra
-        self.__ra = 0
+    def __str__(self):
+        return f"pc: {self.get()}"
 
 
 class IR:
