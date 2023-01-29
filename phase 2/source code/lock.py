@@ -25,4 +25,10 @@ class Queue:
         return self.__count == 0
 
 
+class Lock:
+
+    def __init__(self, flags: list):
+        self.__queue = Queue(len(flags))
+        self.__flags = flags
+        self.__turn = sys.maxsize
 
