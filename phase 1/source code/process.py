@@ -18,3 +18,7 @@ class Process:
 
     def get_id(self):
         return self.__process_id
+
+    def get_commands(self):
+        return self.__commands
+
