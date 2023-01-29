@@ -79,3 +79,7 @@ class OS:
                 os.arithmetic_operate(int(value), instruction, temp, acc)
 
         pc.reset()
+
+    @property
+    def ram(self):
+        return self.__ram
