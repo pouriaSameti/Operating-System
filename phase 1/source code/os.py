@@ -1,4 +1,4 @@
-from registers import *
+from register import *
 
 
 class OS:
@@ -23,3 +23,20 @@ class OS:
         temp.set(value)
         acc.set(value)
 
+    @classmethod
+    def arithmetic_operate(cls, value: int, operation: str, temp: Temp, acc: Accumulator):
+        if operation not in cls.__arithmetic:
+            raise Exception("This is not arithmetic operation")
+
+        temp.set(value)
+
+        result = 0
+        match operation:
+            case 'add':
+                result = acc.get() + temp.get()
+            case 'sub':
+                result = acc.get() - temp.get()
+            case 'mul':
+                result = acc.get() * temp.get()
+
+        acc.set(result)
