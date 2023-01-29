@@ -99,8 +99,8 @@ class OS:
         return np.loadtxt(address, dtype='str', delimiter="\n")
 
     @classmethod
-    def read_instructions(cls, process_id):
-        address = 'input commands\\' + process_id + ' instruction.txt'
+    def read_instructions(cls, file_name: str):
+        address = 'input commands\\' + file_name
         return np.loadtxt(address, dtype='str', delimiter="\n")
 
     @property
