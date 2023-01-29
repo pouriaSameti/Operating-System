@@ -1,4 +1,5 @@
 from registers import *
+from process import Process
 import numpy as np
 
 
@@ -71,18 +72,26 @@ class OS:
         temp.reset()
 
     @classmethod
-    def run(cls, commands: list, os, ir: IR, temp: Temp, acc: Accumulator, pc: PC):
-        for cmd in commands:
-            pc.increment()
-            instruction, value = cmd.split()
-            ir.set(instruction, int(value))
-            if os.type_instruction(instruction) == 'store':
-                os.store_operate(int(value), temp, acc)
+    def run(cls, os, pc: PC, ir: IR, acc: Accumulator, temp: Temp):
+        counter = 0
+        for command in OS.read_commands():
+            print('loop:', counter)
+            print(command)
+            counter += 1
 
-            if os.type_instruction(instruction) == 'arithmetic':
-                os.arithmetic_operate(int(value), instruction, temp, acc)
+            signal, process_id = command.split()
 
-        pc.reset()
+            if signal == 'create_process':
+                instructions = OS.read_instructions(process_id)
+                process = Process(process_id, instructions, os)
+                process.run(signal, os, pc, ir, acc, temp)
+
+            if os.is_exist_process(process_id):
+                process = os.give_process(process_id)
+                process.run(signal, os, pc, ir, acc, temp)
+
+            else:
+                print("Process Does Not Exist")
 
     @classmethod
     def read_commands(cls):
