@@ -74,3 +74,15 @@ class PC:
         self.__amount = self.__ra
         self.__ra = 0
 
+
+class IR:
+
+    def __init__(self, instruction: str, immediate: int):
+        self.__instruction = instruction
+        self.__immediate = immediate
+
+    def get_instruction(self):
+        return self.__instruction
+
+    def get_immediate(self):
+        return self.__immediate
