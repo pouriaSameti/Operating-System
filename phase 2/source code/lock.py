@@ -10,5 +10,12 @@ class Queue:
         self.__rear = 0
         self.__count = 0
 
+    def enqueue(self, obj):
+        self.__array[self.__front] = obj
+        self.__front = (self.__front + 1) % self.__size
+        self.__count += 1
+
+
+
 
 
