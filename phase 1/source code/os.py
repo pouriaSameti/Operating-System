@@ -48,6 +48,9 @@ class OS:
     def add_process(self, process):
         self.__processes[process.get_id()] = process
 
+    def give_process(self, p_id: str):
+        return self.__processes[p_id]
+
     def send_to_ram(self, process):
         counter = 0
         for cmd in process.get_commands():
