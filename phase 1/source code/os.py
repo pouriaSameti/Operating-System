@@ -16,4 +16,10 @@ class OS:
 
         else:
             return '-'
-        
+
+    @classmethod
+    def store_operate(cls, instruction: str, value: int, ir: IR, temp: Temp, acc: Accumulator):
+        ir.set(instruction, value)
+        temp.set(value)
+        acc.set(value)
+
