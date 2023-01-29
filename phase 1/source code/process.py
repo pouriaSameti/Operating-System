@@ -75,7 +75,11 @@ class Process:
         if signal == 'show_context':
             result = ''
             if self.__state == Process.__states[2]:
-                result = self.get_id() + ' is ' + self.__state
+                result = result = self.get_id() + '\n' + 'Instruction Register:' + str(self.__context['ir']) +\
+                                  '\n\n' + 'Accumulator:' + str(self.__context['acc']) + '\t' + \
+                                  f'Temp:' + str(self.__context['temp']) + '\n' +\
+                                  'pc: ' + str(self.__start_line + self.__current_line) + '\t\t\t' + \
+                                  'State:' + self.__state
 
             else:
                 result = self.get_id() + '\n' + ir.__str__() + '\n\n' + acc.__str__() + '\t' + \
