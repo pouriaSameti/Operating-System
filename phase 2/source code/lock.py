@@ -15,6 +15,12 @@ class Queue:
         self.__front = (self.__front + 1) % self.__size
         self.__count += 1
 
+    def dequeue(self):
+        item = self.__array[self.__rear]
+        self.__rear = (self.__rear + 1) % self.__size
+        self.__count -= 1
+        return item
+
 
 
 
