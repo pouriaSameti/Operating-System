@@ -15,3 +15,6 @@ class Process:
         self.__start_line = len(os.ram)
         self.__end_pc = self.__start_line + len(commands)
         self.__current_line = 0
+
+    def get_id(self):
+        return self.__process_id
