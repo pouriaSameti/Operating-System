@@ -35,3 +35,10 @@ class Lock:
     def __is_free(self):
         return not any(self.__flags)
 
+    def acquire(self, process_id) -> bool:
+        if not self.__is_free():
+            self.__queue.enqueue(process_id)
+            return False
+        self.__flags[process_id] = True
+        return self.__flags[process_id]
+
