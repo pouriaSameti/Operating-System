@@ -16,3 +16,8 @@ class Lock:
         right_producer.value = 1
         while left_producer.value == 1 and turn_produce.value == 0:
             pass
+
+    @classmethod
+    def signal(cls, val: Value):
+        val.value = 0
+        
