@@ -15,13 +15,15 @@ def producer(queue, id, left_produce, right_produce, turn_producer, lock: Lock):
         queue.put(value)
 
 
-def consumer(queue, street):
+def consumer(queue, street, left_consumer, right_consumer, turn_consumer, lock: Lock):
     print('Consumer: Running', flush=True)
     while True:
         item = queue.get()
+        lock.wait_consumer_right(left_consumer, right_consumer, turn_consumer)
         street.value = item.id
-        print('car id: ', item.id, 'sleep: ', item.time)
+        print('right car id: ', item.id, 'sleep: ', item.time)
         temp = street.value
         sleep(item.time)
         if temp != street.value:
             print('Process conflict!')
+        lock.signal(right_consumer)
