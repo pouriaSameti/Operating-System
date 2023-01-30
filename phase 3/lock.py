@@ -18,5 +18,12 @@ class Lock:
             pass
 
     @classmethod
+    def wait_consumer_left(cls, left_consume, right_consumer, turn_consumer):
+        left_consume.value = 1
+        turn_consumer.value = 1
+        while right_consumer.value == 1 and turn_consumer.value == 1:
+            pass
+
+    @classmethod
     def signal(cls, val: Value):
         val.value = 0
