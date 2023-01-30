@@ -20,4 +20,3 @@ class Lock:
     @classmethod
     def signal(cls, val: Value):
         val.value = 0
-        

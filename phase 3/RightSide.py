@@ -1,14 +1,17 @@
 from multiprocessing import Process, Queue, Value, Array
 from time import sleep
 from Car import Car
+from lock import Lock
 
 
-def producer(queue, id,):
+def producer(queue, id, left_produce, right_produce, turn_producer, lock: Lock):
     print('Producer: Running', flush=True)
     while True:
         value = Car(id.value)
+        lock.wait_producer_right(left_produce, right_produce, turn_producer)
         id.value += 1
-        sleep(0.5)
+        lock.signal(right_produce)
+        sleep(100)
         queue.put(value)
 
 
